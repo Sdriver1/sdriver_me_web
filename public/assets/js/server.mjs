@@ -12,15 +12,18 @@ const __dirname = dirname(__filename);
 const app1 = express();
 const port1 = 8084;
 
-// Serve static files (JS, CSS, images)
 app1.use("/assets", express.static(join(__dirname, "../../../public/assets")));
 
-// Route for serving HTML for sdriver1.me (normal/index.html)
 app1.get("/", (req, res) => {
-  res.sendFile(join(__dirname, "../../../public/normal/index.html")); // Corrected path
+  res.sendFile(join(__dirname, "../../../public/normal/index.html")); 
+});
+app1.get("/github", (req, res) => {
+  res.sendFile(join(__dirname, "../../../public/normal/github.html")); 
+});
+app1.get("/linkedin", (req, res) => {
+  res.sendFile(join(__dirname, "../../../public/normal/linkedin.html"));
 });
 
-// Listen on port 8084
 app1.listen(port1, () => {
   console.log(`Server running on http://sdriver1.me:${port1}`);
 });
@@ -30,18 +33,15 @@ app1.listen(port1, () => {
 const app2 = express();
 const port2 = 8085;
 
-// Serve static files (JS, CSS, images)
 app2.use("/assets", express.static(join(__dirname, "../../../public/assets")));
 
-// Route for serving HTML for apcsa.sdriver1.me (apcsa/index.html)
 app2.get("/chatbot1", (req, res) => {
-  res.sendFile(join(__dirname, "../../../public/apcsa/chatbot1.html")); // Corrected path
+  res.sendFile(join(__dirname, "../../../public/apcsa/chatbot1.html")); 
 });
 app2.get("/chatbot2", (req, res) => {
-  res.sendFile(join(__dirname, "../../../public/apcsa/chatbot2.html")); // Corrected path
+  res.sendFile(join(__dirname, "../../../public/apcsa/chatbot2.html")); 
 });
 
-// Listen on port 8085
 app2.listen(port2, () => {
   console.log(`Server running on http://apcsa.sdriver1.me:${port2}`);
 });
@@ -50,10 +50,7 @@ app2.listen(port2, () => {
 const app3 = express();
 const port3 = 8086;
 
-// Serve static files for apcsa.sdriver1.me
 app3.use("/assets", express.static(join(__dirname, "../../../public/assets")));
-
-// Route for serving images
 app3.get("/:imageName", (req, res) => {
   const imageName = req.params.imageName;
   const imagePath = join(__dirname, "../../../public/assets/images", imageName);
@@ -61,7 +58,6 @@ app3.get("/:imageName", (req, res) => {
   console.log(`Requested image: ${imageName}`);
   console.log(`Looking for image at: ${imagePath}`);
 
-  // Check if the file exists before sending
   fs.access(imagePath, fs.constants.F_OK, (err) => {
     if (err) {
       console.error(`Image not found: ${imagePath}`);
@@ -72,7 +68,6 @@ app3.get("/:imageName", (req, res) => {
   });
 });
 
-// Listen on port 8086
 app3.listen(port3, () => {
   console.log(`Server running on http://images.sdriver1.me:${port3}`);
 });
