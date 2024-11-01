@@ -23,6 +23,9 @@ app1.get("/github", (req, res) => {
 app1.get("/linkedin", (req, res) => {
   res.sendFile(join(__dirname, "../../../public/normal/linkedin.html"));
 });
+app1.get("/kofi", (req, res) => {
+  res.sendFile(join(__dirname, "../../../public/normal/kofi.html"));
+});
 
 app1.listen(port1, () => {
   console.log(`Server running on http://sdriver1.me:${port1}`);
